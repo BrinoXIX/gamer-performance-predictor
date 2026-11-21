@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0b1020">
+    <title>Gamer Performance Predictor</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <main class="page-shell">
+        <nav class="topbar" aria-label="Main navigation">
+            <a class="brand" href="/" aria-label="LevelUp home"><span class="brand-mark">L</span><span>LEVEL<span class="brand-accent">UP</span></span></a>
+            <span class="topbar-label"><span class="status-dot"></span> PERFORMANCE ANALYTICS</span>
+        </nav>
+        <section class="hero">
+            <div class="eyebrow"><span class="eyebrow-line"></span> PLAYER INSIGHTS</div>
+            <h1>Know your level.<br><span>Own your game.</span></h1>
+            <p class="hero-copy">Turn your gaming habits into insight. Enter your stats below to estimate your current skill tier.</p>
+        </section>
+        <section class="predictor-card" aria-labelledby="form-title">
+            <div class="card-heading">
+                <div><div class="section-kicker">SKILL ASSESSMENT</div><h2 id="form-title">Player statistics</h2><p class="card-subtitle">Fill in your details to generate a prediction.</p></div>
+                <div class="card-icon" aria-hidden="true">✦</div>
+            </div>
+            <form action="{{ url_for('predict') }}" method="POST" class="predict-form">
+                <div class="field"><label for="hours">Gaming hours <span>PER DAY</span></label><div class="input-wrap"><input id="hours" type="number" name="hours" min="0" max="24" step="any" placeholder="e.g. 3" required><span class="input-unit">hrs</span></div><small>Average time spent gaming each day</small></div>
+                <div class="field"><label for="accuracy">Accuracy <span>0–100%</span></label><div class="input-wrap"><input id="accuracy" type="number" name="accuracy" min="0" max="100" step="any" placeholder="e.g. 75" required><span class="input-unit">%</span></div><small>Your average in-game accuracy</small></div>
+                <div class="field"><label for="experience">Experience <span>IN YEARS</span></label><div class="input-wrap"><input id="experience" type="number" name="experience" min="0" step="any" placeholder="e.g. 2" required><span class="input-unit">yrs</span></div><small>How long you have been playing</small></div>
+                <button type="submit" class="submit-button"><span>Predict my skill level</span><span class="button-arrow" aria-hidden="true">↗</span></button>
+            </form>
+            {% if error is defined and error %}
+            <div class="result-panel" role="alert">
+                <div class="result-icon">!</div>
+                <div>
+                    <div class="result-label">CHECK YOUR INPUT</div>
+                    <div class="result-value">{{ error }}</div>
+                </div>
+            </div>
+            {% endif %}
+
+            {% if prediction is defined and prediction is not none %}
+            <div class="result-panel" role="status" aria-live="polite"><div class="result-icon">✓</div><div><div class="result-label">YOUR PREDICTED SKILL TIER</div><div class="result-value">{{ prediction }}</div></div></div>
+            {% endif %}
+        </section>
+        <footer class="footer"><span>LEVELUP <span class="footer-separator">/</span> GAMER ANALYTICS</span><span>Play smart. Keep improving.</span></footer>
+    </main>
+</body>
+</html>
