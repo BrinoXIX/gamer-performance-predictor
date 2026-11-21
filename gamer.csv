@@ -1,0 +1,14 @@
+
+hours,accuracy,experience,skill
+1,25,0.5,Beginner
+2,35,1,Beginner
+3,45,1,Beginner
+4,60,2,Intermediate
+5,70,3,Intermediate
+4,65,2,Intermediate
+6,80,4,Professional
+7,90,5,Professional
+8,95,6,Professional
+6,85,5,Professional
+2,30,1,Beginner
+5,75,3,Intermediate
